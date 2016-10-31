@@ -1,6 +1,6 @@
 {
   "name": "__MSG_appName__",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "manifest_version": 2,
   "description": "__MSG_appDescription__",
   "icons": {
@@ -8,13 +8,22 @@
     "128": "images/icon-128.png"
   },
   "default_locale": "en",
-  "background": {
-    "scripts": [
-      "scripts/chromereload.js",
-      "scripts/background.js"
-    ]
-  },
   "permissions": [
-    "background"
+    "tabs",
+    "*://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["scripts/content.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["http://www.xxx.com/xxx"],
+      "js": ["scripts/main.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    "scripts/main.js"
   ]
 }
